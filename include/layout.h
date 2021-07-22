@@ -2,6 +2,7 @@
 #define _LAYOUT_H_
 
 #include <map>
+#include <cstdint>
 
 #include <parser.h>
 

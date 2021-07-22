@@ -6,7 +6,7 @@
 
 class Parser { 
 public:
-	Parser();
+	Parser(){}
 
 	inline void file( char const* path, char* mode ) {
 
@@ -34,7 +34,7 @@ public:
 
 	inline void fileclose()	{ fclose( file_ref ); }
 
-	~Parser();
+	~Parser(){}
 protected:
 	FILE* file_ref;
 	char* buffer_file;
