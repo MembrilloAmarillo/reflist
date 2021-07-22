@@ -20,7 +20,7 @@ int main ( int argc, char **argv )
 
 	size_t file_size_read = fread( parse_file.get_buffer(), 1, parse_file.get_size(), parse_file.get_file() );
 	if ( file_size_read != parse_file.get_size() ) {
-		fprintf( stderr, "Diferente sizes read, error reading file\n" );
+		fprintf( stderr, "Diferent sizes, error readinf file\n" );
 		exit(1);
 	}
 
@@ -38,7 +38,10 @@ int main ( int argc, char **argv )
 			case 4:
 				{}break;
 			case 5:
-				{}break;
+				{
+					printf("Exiting...\n");
+					exit(1);
+				}break;
 			default:
 				{}break;
 		};
@@ -57,13 +60,13 @@ int menu()
 	/* goes to the first line of the screen */
 	printf("\x1b[H");
 	printf("--REFERENCIAS--\n");
-	printf("	1. Introducir materia.\n");
-	printf("	2. Introducir referencia.\n");
-	printf("	3. Borrar materia\n");
-	printf("	4. Borrar referencia\n");
-	printf("	5. Salir\n");
+	printf("	1. Introduce subject.\n");
+	printf("	2. Introduce reference.\n");
+	printf("	3. Delete subject\n");
+	printf("	4. Delte reference\n");
+	printf("	5. Exit\n");
 	printf("\n");
-	printf("Ir a(1-5): ");
+	printf("Go to(1-5): ");
 	scanf("%d", &select);
 
 	return select;

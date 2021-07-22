@@ -16,11 +16,16 @@ TARGET = ${BUILD_DIR}/parser
 all: ${TARGET}
 
 ${TARGET} : ${OBJ}
-	${CC} ${CXXFLAGS} -o $@ $^
+	${CC} -o $@ $^ ${CXXFLAGS} 
 
 ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC} -c -o $@ $< ${CXXFLAGS}
 
+${BUILD_DIR}:
+	mkdir ^@
+${OBJ_DIR}:
+	mkdir ^@
+	
 .PHONY : clean
 
 clean:

@@ -1,4 +1,5 @@
 #include <layout.h>
+#include <cassert>
 
 void Layout::map_file() 
 {

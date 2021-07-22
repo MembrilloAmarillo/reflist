@@ -1,13 +1,12 @@
 #ifndef _LAYOUT_H_
 #define _LAYOUT_H_
 
-#include <multimap>
+#include <map>
 
 #include <parser.h>
 
 class Layout : public Parser
 {
-	struct layout;
 public:
 	Layout() {}
 
