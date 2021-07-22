@@ -1,0 +1,27 @@
+CC = g++
+
+INC_DIR 	= ./include
+SRC_DIR		= ./src
+OBJ_DIR  	= ./obj
+BUILD_DIR 	= ./build
+
+INC = ${INC_DIR}/parser.h ${INC_DIR}/layout.h
+SRC = ${SRC_DIR}/main.cpp ${SRC_DIR}/parser.cpp ${SRC_DIR}/layout.cpp
+OBJ = ${OBJ_DIR}/main.o ${OBJ_DIR}/parser.o ${OBJ_DIR}/layout.o
+
+CXXFLAGS = -I${INC_DIR} -Wall
+
+TARGET = ${BUILD_DIR}/parser
+
+all: ${TARGET}
+
+${TARGET} : ${OBJ}
+	${CC} ${CXXFLAGS} -o $@ $^
+
+${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
+	${CC} -c -o $@ $< ${CXXFLAGS}
+
+.PHONY : clean
+
+clean:
+	${RM} ${RMFLAGS} ${BUILD_DIR}/* ${OBJ_DIR}/*.o 
