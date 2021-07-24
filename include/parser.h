@@ -34,7 +34,7 @@ public:
 
 	inline void fileclose()	{ fclose( file_ref ); }
 
-	~Parser() { buffree(); }
+	~Parser() { }
 
 protected:
 	FILE* file_ref;
