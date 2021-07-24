@@ -1,15 +1,16 @@
 CC = g++
 
 INC_DIR 	= ./include
+EXT_DIR 	= ./external/AAED/
 SRC_DIR		= ./src
 OBJ_DIR  	= ./obj
 BUILD_DIR 	= ./build
 
-INC = ${INC_DIR}/parser.h ${INC_DIR}/layout.h
+INC = ${INC_DIR}/parser.h ${INC_DIR}/layout.h ${EXT_DIR}/TAD/lista_enla_cab.h
 SRC = ${SRC_DIR}/main.cpp ${SRC_DIR}/parser.cpp ${SRC_DIR}/layout.cpp
 OBJ = ${OBJ_DIR}/main.o ${OBJ_DIR}/parser.o ${OBJ_DIR}/layout.o
 
-CXXFLAGS = -I${INC_DIR} -Wall -std=c++17
+CXXFLAGS = -I${INC_DIR} -I${EXT_DIR} -Wall -std=c++17
 
 TARGET = ${BUILD_DIR}/parser
 

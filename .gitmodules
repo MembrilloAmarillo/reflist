@@ -1,0 +1,3 @@
+[submodule "AAED"]
+	path = AAED
+	url = git@github.com:MembrilloAmarillo/AAED.git
