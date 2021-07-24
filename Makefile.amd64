@@ -22,9 +22,9 @@ ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC} -g -c -o $@ $< ${CXXFLAGS}
 
 ${BUILD_DIR}:
-	mkdir ^@
+	mkdir $@
 ${OBJ_DIR}:
-	mkdir ^@
+	mkdir $@
 	
 .PHONY : clean
 
