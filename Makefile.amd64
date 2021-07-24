@@ -13,6 +13,8 @@ CXXFLAGS = -I${INC_DIR} -Wall
 
 TARGET = ${BUILD_DIR}/parser
 
+.PHONY : all
+
 all: ${TARGET}
 
 ${TARGET} : ${OBJ}
