@@ -16,10 +16,10 @@ TARGET = ${BUILD_DIR}/parser
 all: ${TARGET}
 
 ${TARGET} : ${OBJ}
-	${CC} -o $@ $^ ${CXXFLAGS} 
+	${CC} -g -o $@ $^ ${CXXFLAGS} 
 
 ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
-	${CC} -c -o $@ $< ${CXXFLAGS}
+	${CC} -g -c -o $@ $< ${CXXFLAGS}
 
 ${BUILD_DIR}:
 	mkdir ^@

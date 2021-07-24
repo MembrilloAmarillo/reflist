@@ -2,7 +2,11 @@
 #define _LAYOUT_H_
 
 #include <map>
+#include <algorithm>
+#include <iostream>
 #include <cstdint>
+#include <cstring>
+#include <cassert>
 
 #include <parser.h>
 
@@ -15,6 +19,8 @@ public:
 
 	void insert_subject( char* );
 	void insert_reference( char*, char* );
+
+	void print_file();
 
 	~Layout() {}
 protected:

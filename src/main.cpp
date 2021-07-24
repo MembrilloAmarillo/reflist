@@ -24,13 +24,18 @@ int main ( int argc, char **argv )
 		exit(1);
 	}
 
+	printf( "%s", parse_file.get_buffer() );
+	parse_file.map_file();
+
 	bool not_exit = true;
 
 	while( not_exit ) {
 		int output = menu();
 		switch( output ) {
 			case 1:
-				{}break;
+				{
+					parse_file.print_file();
+				}break;
 			case 2:
 				{}break;
 			case 3:
@@ -56,9 +61,9 @@ int menu()
 {
 	int select;
 	/* "blank" screen */
-	printf("\x1b[2J");
+	//printf("\x1b[2J");
 	/* goes to the first line of the screen */
-	printf("\x1b[H");
+	//printf("\x1b[H");
 	printf("--REFERENCIAS--\n");
 	printf("	1. Introduce subject.\n");
 	printf("	2. Introduce reference.\n");
