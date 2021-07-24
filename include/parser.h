@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <cassert>
 
 class Parser { 
 public:
@@ -19,20 +20,20 @@ public:
 
 	}
 	inline void buffer( size_t size ) {
-		buffer_file = new char[ size ];
+		buffer_file = (char*)malloc( size * sizeof( char ) );
 		buff_size = size;
 
-		if ( buffer_file == nullptr ) {
-			fprintf(stderr, "Error allocating the buffer_file file\n");
-			exit(1);
-		}
+		assert( buffer_file != nullptr );
 	}
 
 	inline FILE*  get_file() 	{ return file_ref;  }
 	inline size_t get_size() 	{ return buff_size; }
 	inline char*  get_buffer() 	{ return buffer_file; }
 
-	inline void fileclose()	{ fclose( file_ref ); }
+	inline void fileclose()	{ 
+		buffree();
+		fclose( file_ref ); 
+	}
 
 	~Parser() { }
 
@@ -41,7 +42,7 @@ protected:
 	char* buffer_file;
 	size_t buff_size;
 
-	inline void buffree()	{ delete[] buffer_file;    }
+	inline void buffree()	{ free( buffer_file );    }
 };
 
 #endif

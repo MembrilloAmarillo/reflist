@@ -24,7 +24,8 @@ int main ( int argc, char **argv )
 		exit(1);
 	}
 
-	parse_file.map_file();
+	// parse_file.map_file();
+	printf( "%s\n", parse_file.get_buffer() );
 
 	bool not_exit = true;
 
@@ -33,7 +34,7 @@ int main ( int argc, char **argv )
 		switch( output ) {
 			case 1:
 				{
-					parse_file.print_file();
+					parse_file.insert_subject( (char const*)"[Ramadan]" );
 				}break;
 			case 2:
 				{}break;
