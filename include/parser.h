@@ -1,48 +1,26 @@
-#ifndef _PARSER_H_
-#define _PARSER_H_
+#ifndef _LAYOUT_H_
+#define _LAYOUT_H_
 
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
+#include <cstdint>
+#include <cstring>
 #include <cassert>
 
-class Parser { 
+#include <lexer.h>
+
+class Parser : public Lexer
+{
 public:
-	Parser(){}
+	Parser() {}
 
-	inline void file( char const* path, char* mode ) {
+	void map_file();
 
-		file_ref = fopen( path, mode );
+	void insert_subject( char const* );
+	void insert_reference( char const*, char const*, char const* );
 
-		if ( file_ref == nullptr ) {
-			fprintf(stderr, "Error opening file\n");
-			exit(1);
-		}
-
-	}
-	inline void buffer( size_t size ) {
-		buffer_file = (char*)malloc( size * sizeof( char ) );
-		buff_size = size;
-
-		assert( buffer_file != nullptr );
-	}
-
-	inline FILE*  get_file() 	{ return file_ref;  }
-	inline size_t get_size() 	{ return buff_size; }
-	inline char*  get_buffer() 	{ return buffer_file; }
-
-	inline void fileclose()	{ 
-		buffree();
-		fclose( file_ref ); 
-	}
-
-	~Parser() { }
-
+	~Parser() {}
 protected:
-	FILE* file_ref;
-	char* buffer_file;
-	size_t buff_size;
 
-	inline void buffree()	{ free( buffer_file );    }
 };
 
 #endif
