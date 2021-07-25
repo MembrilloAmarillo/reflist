@@ -13,7 +13,7 @@ class Parser : public Lexer
 public:
 	Parser() {}
 
-	void map_file();
+	void parse_buffer();
 
 	void insert_subject( char const* );
 	void insert_reference( char const*, char const*, char const* );

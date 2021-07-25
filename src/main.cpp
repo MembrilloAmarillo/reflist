@@ -8,24 +8,23 @@ int menu();
 
 int main ( int argc, char **argv ) 
 {
-	Lexer lexer_file;
+	Parser parse_file;
 
-	lexer_file.file( const_cast<char*>("src/references.txt"), const_cast<char*>("r+") );
+	parse_file.file( const_cast<char*>("src/references.txt"), const_cast<char*>("r+") );
 
-	fseek( lexer_file.get_file(), 0, SEEK_END );
-	size_t size = ftell( lexer_file.get_file() );
-	lexer_file.buffer( size );
+	fseek( parse_file.get_file(), 0, SEEK_END );
+	size_t size = ftell( parse_file.get_file() );
+	parse_file.buffer( size );
 
-	rewind( lexer_file.get_file() );
+	rewind( parse_file.get_file() );
 
-	size_t file_size_read = fread( lexer_file.get_buffer(), 1, lexer_file.get_size(), lexer_file.get_file() );
-	if ( file_size_read != lexer_file.get_size() ) {
+	size_t file_size_read = fread( parse_file.get_buffer(), 1, parse_file.get_size(), parse_file.get_file() );
+	if ( file_size_read != parse_file.get_size() ) {
 		fprintf( stderr, "Diferent sizes, error readinf file\n" );
 		exit(1);
 	}
 
-	// lexer_file.map_file();
-	printf( "%s\n", lexer_file.get_buffer() );
+	parse_file.parse_buffer();
 
 	bool not_exit = true;
 
@@ -34,7 +33,7 @@ int main ( int argc, char **argv )
 		switch( output ) {
 			case 1:
 				{
-					//lexer_file.insert_subject( (char const*)"[Ramadan]" );
+					parse_file.insert_subject( (char const*)"[subject0]" );
 				}break;
 			case 2:
 				{}break;
@@ -52,7 +51,7 @@ int main ( int argc, char **argv )
 		};
 	}
 
-	lexer_file.fileclose();
+	parse_file.fileclose();
 
 	return EXIT_SUCCESS;
 }
