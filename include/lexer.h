@@ -6,6 +6,7 @@
 #include <cassert>
 
 #include <TAD/pila_enla.h>
+#include <my_string.h>
 
 class Lexer { 
 public:
@@ -38,6 +39,8 @@ public:
 		buffree();
 		fclose( file_ref ); 
 	}
+
+	void print_cache();
 
 	~Lexer() { }
 

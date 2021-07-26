@@ -1,19 +1,20 @@
 #include <cstdlib>
 #include <cstdio>
+#include <iostream>
 
 #include <parser.h>
 #include <lexer.h>
 
 int menu();
 
-int main ( int argc, char **argv ) 
+int main () 
 {
 	Parser parse_file;
 
 	parse_file.file( const_cast<char*>("src/references.txt"), const_cast<char*>("r+") );
 
 	fseek( parse_file.get_file(), 0, SEEK_END );
-	size_t size = ftell( parse_file.get_file() );
+	size_t size = (size_t)ftell( parse_file.get_file() );
 	parse_file.buffer( size );
 
 	rewind( parse_file.get_file() );
@@ -28,23 +29,38 @@ int main ( int argc, char **argv )
 
 	bool not_exit = true;
 
+	char subject[126];
+	char title[126];
+	char url[126];
+
 	while( not_exit ) {
 		int output = menu();
 		switch( output ) {
 			case 1:
 				{
-					parse_file.insert_subject( (char const*)"[subject0]" );
+					std::cout << "Subject name: ";
+					std::cin >> subject;
+					parse_file.insert_subject( subject );
 				}break;
 			case 2:
-				{}break;
+				{
+					std::cout << "Subject name: ";
+					std::cin >> subject;
+					std::cout << "Title name: ";
+					std::cin >> title;
+					std::cout << "Url: ";
+					std::cin >> url;
+					parse_file.insert_reference( subject, title, url );
+				}break;
 			case 3:
 				{}break;
 			case 4:
 				{}break;
 			case 5:
 				{
+					not_exit = false;
+					parse_file.print_cache();
 					printf("Exiting...\n");
-					exit(1);
 				}break;
 			default:
 				{}break;
@@ -67,7 +83,7 @@ int menu()
 	printf("	1. Introduce subject.\n");
 	printf("	2. Introduce reference.\n");
 	printf("	3. Delete subject\n");
-	printf("	4. Delte reference\n");
+	printf("	4. Delete reference\n");
 	printf("	5. Exit\n");
 	printf("\n");
 	printf("Go to(1-5): ");

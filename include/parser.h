@@ -7,6 +7,7 @@
 #include <cassert>
 
 #include <lexer.h>
+#include <my_string.h>
 
 class Parser : public Lexer
 {
@@ -15,8 +16,8 @@ public:
 
 	void parse_buffer();
 
-	void insert_subject( char const* );
-	void insert_reference( char const*, char const*, char const* );
+	void insert_subject( char *const );
+	void insert_reference( char *const, char *const, char *const );
 
 	~Parser() {}
 protected:
