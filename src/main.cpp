@@ -40,7 +40,7 @@ int main ()
 				{
 					std::cout << "Subject name: ";
 					std::cin >> subject;
-					parse_file.insert_subject( subject );
+					parse_file.insert_subject( subject, Parser::entry::SUBJECT );
 				}break;
 			case 2:
 				{

@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
+#include <iostream>
 
 #include <TAD/pila_enla.h>
 #include <my_string.h>
@@ -40,8 +41,24 @@ public:
 		fclose( file_ref ); 
 	}
 
-	void print_cache();
+	void print_cache() {
+		pila<char*> tmp;
 
+		char buff[126] = {0};
+		while( !cache.vacia() ) {
+			my_strcpy( buff, cache.show_top() );
+			tmp.push( buff );
+			cache.pop();
+		}
+
+		while( !tmp.vacia() ) {
+			my_strcpy( buff, tmp.show_top() );
+			cache.push( buff );
+			std::cout << buff << std::endl;
+			tmp.pop();
+		}
+	}
+	
 	~Lexer() { }
 
 protected:
