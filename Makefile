@@ -18,24 +18,20 @@ OBJ = ${OBJ_DIR}/main.o ${OBJ_DIR}/parser.o \
 
 CXXFLAGS = -I${INC_DIR} -I${EXT_DIR} -std=c++11 -Wall -Werror -pedantic-errors \
 		   -Wextra -Wconversion -Wformat -Wparentheses  
+LIBS = -lstdc++
 
 TARGET = ${BUILD_DIR}/parser
-
-.PHONY : all
 
 all: ${TARGET}
 
 ${TARGET} : ${OBJ}
-	${CC} -g -o $@ $^ ${CXXFLAGS} 
+	@mkdir -p $(BUILD_DIR)
+	${CC} ${CXXFLAGS} -g -o $@ $^ ${LIBS}
 
-${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
-	${CC} -g -c -o $@ $< ${CXXFLAGS}
+./obj/%.o : ${SRC_DIR}/%.cpp
+	@mkdir -p $(OBJ_DIR)
+	${CC} ${CXXFLAGS} -g -c -o $@ $< 
 
-${BUILD_DIR}:
-	mkdir $@
-${OBJ_DIR}:
-	mkdir $@
-	
 .PHONY : clean
 
 clean:

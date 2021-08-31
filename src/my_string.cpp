@@ -36,7 +36,6 @@ size_t my_strlen( char const* buffer )
 void my_strcpy( char* dest, char const* src )
 {
 	assert( dest != nullptr && src != nullptr );
-	assert( my_strlen( dest ) >= my_strlen( src ) );
 
 	int i = 0;
 	do {

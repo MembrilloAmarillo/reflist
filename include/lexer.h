@@ -42,17 +42,17 @@ public:
 	}
 
 	void print_cache() {
-		pila<char*> tmp;
+		Pila<char*> tmp;
 
 		char buff[126] = {0};
 		while( !cache.vacia() ) {
-			my_strcpy( buff, cache.show_top() );
+			my_strcpy( buff, cache.tope() );
 			tmp.push( buff );
 			cache.pop();
 		}
 
 		while( !tmp.vacia() ) {
-			my_strcpy( buff, tmp.show_top() );
+			my_strcpy( buff, tmp.tope() );
 			cache.push( buff );
 			std::cout << buff << std::endl;
 			tmp.pop();
@@ -66,7 +66,7 @@ protected:
 	char* buffer_file;
 	size_t buff_size;
 
-	pila<char*> cache;
+	Pila<char*> cache;
 
 	inline void buffree()	{ free( buffer_file );    }
 };

@@ -5,7 +5,25 @@
 #include <parser.h>
 #include <lexer.h>
 
-int menu();
+static int menu()
+{
+	int select;
+	/* "blank" screen */
+	//printf("\x1b[2J");
+	/* goes to the first line of the screen */
+	//printf("\x1b[H");
+	printf("--REFERENCIAS--\n");
+	printf("	1. Introduce subject.\n");
+	printf("	2. Introduce reference.\n");
+	printf("	3. Delete subject\n");
+	printf("	4. Delete reference\n");
+	printf("	5. Exit\n");
+	printf("\n");
+	printf("Go to(1-5): ");
+	scanf("%d", &select);
+
+	return select;
+}
 
 int main () 
 {
@@ -72,22 +90,3 @@ int main ()
 	return EXIT_SUCCESS;
 }
 
-int menu()
-{
-	int select;
-	/* "blank" screen */
-	//printf("\x1b[2J");
-	/* goes to the first line of the screen */
-	//printf("\x1b[H");
-	printf("--REFERENCIAS--\n");
-	printf("	1. Introduce subject.\n");
-	printf("	2. Introduce reference.\n");
-	printf("	3. Delete subject\n");
-	printf("	4. Delete reference\n");
-	printf("	5. Exit\n");
-	printf("\n");
-	printf("Go to(1-5): ");
-	scanf("%d", &select);
-
-	return select;
-}

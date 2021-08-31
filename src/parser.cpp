@@ -77,13 +77,13 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 
 void Parser::insert_reference( char* const subject, char* const title, char* const url )
 {
-	pila<char*> tmp_cache;
+	Pila<char*> tmp_cache;
 	char tmp_buff[126] = {0};
 
 	bool not_founded = true;
 
 	while( ( !Lexer::cache.vacia() ) &&  not_founded ) {
-		my_strcpy( tmp_buff, Lexer::cache.show_top() );
+		my_strcpy( tmp_buff, Lexer::cache.tope() );
 
 		if ( std::strcmp( subject, tmp_buff ) == 0 ) {
 			Lexer::cache.push( title );
@@ -106,7 +106,7 @@ void Parser::insert_reference( char* const subject, char* const title, char* con
 	}
 
 	while( !tmp_cache.vacia() ) {
-		my_strcpy( tmp_buff,  tmp_cache.show_top() );
+		my_strcpy( tmp_buff,  tmp_cache.tope() );
 		Lexer::cache.push( tmp_buff );
 		tmp_cache.pop();
 	}
