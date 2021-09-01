@@ -1,6 +1,11 @@
 #ifndef _PARSER_H_
 #define _PARSER_H_
 
+extern "C" {
+#define _GNU_SOURCE 1
+#include <sys/mman.h>
+}
+
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
@@ -34,7 +39,11 @@ protected:
 
 	Pila<char*> cache;
 
-	inline void buffree()	{ free( buffer_file );    }
+	inline void buffree()
+	{
+		int err = munmap( buffer_file, buff_size * sizeof( char ) );
+		assert( err == 0 );
+	}
 };
 
 #endif

@@ -42,8 +42,12 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 		case entry::SUBJECT :
 			{
 			// 3 more bytes to insert '[' and ']\n'
-				buff_size += my_strlen( new_subject ) + 3;
-				buffer_file = (char *)realloc( buffer_file, buff_size * sizeof( char ) );
+				size_t sub_len = my_strlen( new_subject );
+				/* mremap( addr, old_size, new_size, flags, ...) __THROW */
+				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 3, MREMAP_MAYMOVE | MREMAP_DONTUNMAP );
+				buff_size +=  sub_len + 3;
+
+				assert( buffer_file != MAP_FAILED );
 				
 				std::strcat( buffer_file, "[" );
 				std::strcat( buffer_file, new_subject );
@@ -52,8 +56,11 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 		case entry::TITLE :
 			{
 				// 2 more bytes to insert '-' and ':'
-				buff_size += my_strlen( new_subject ) + 2;
-				buffer_file = (char *)realloc( buffer_file, buff_size * sizeof( char ) );
+				size_t sub_len = my_strlen( new_subject );
+				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 2, MREMAP_MAYMOVE | MREMAP_DONTUNMAP );
+				buff_size +=  sub_len + 2;
+
+				assert( buffer_file != MAP_FAILED );
 				
 				std::strcat( buffer_file, "-" );
 				std::strcat( buffer_file, new_subject );
@@ -62,9 +69,12 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 		case entry::URL :
 			{
 				// 2 more byte to insert '\t' and '\n'
-				buff_size += my_strlen( new_subject ) + 2;
-				buffer_file = (char *)realloc( buffer_file, buff_size * sizeof( char ) );
-				
+				size_t sub_len = my_strlen( new_subject );
+				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 2, MREMAP_MAYMOVE | MREMAP_DONTUNMAP);
+				buff_size +=  sub_len + 2;
+
+				assert( buffer_file != MAP_FAILED );
+
 				std::strcat( buffer_file, "\t" );
 				std::strcat( buffer_file, new_subject );
 				std::strcat( buffer_file, "\n" );

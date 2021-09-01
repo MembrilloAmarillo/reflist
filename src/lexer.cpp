@@ -1,6 +1,6 @@
 #include <lexer.h>
 
-inline void Lexer::file( char const* path, char* mode )
+void Lexer::file( char const* path, char* mode )
 {
 
 	file_ref = fopen( path, mode );
@@ -12,15 +12,16 @@ inline void Lexer::file( char const* path, char* mode )
 
 }
 
-inline void Lexer::buffer( size_t size )
+void Lexer::buffer( size_t size )
 {
-	buffer_file = (char*)malloc( size * sizeof( char ) );
+	buffer_file = (char*)mmap( NULL, size * sizeof(char), PROT_READ | PROT_WRITE,
+			MAP_PRIVATE | MAP_ANONYMOUS, -1, 0 );
 	buff_size = size;
 
-	assert( buffer_file != nullptr );
+	assert( buffer_file != MAP_FAILED );
 }
 
-inline void Lexer::fileclose()
+void Lexer::fileclose()
 { 
 	buffree();
 	fclose( file_ref ); 

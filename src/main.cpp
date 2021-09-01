@@ -37,7 +37,9 @@ int main ()
 
 	rewind( parse_file.get_file() );
 
-	size_t file_size_read = fread( parse_file.get_buffer(), 1, parse_file.get_size(), parse_file.get_file() );
+	size_t file_size_read = fread( parse_file.get_buffer(), 1,
+			parse_file.get_size(), parse_file.get_file() );
+
 	if ( file_size_read != parse_file.get_size() ) {
 		fprintf( stderr, "Diferent sizes, error readinf file\n" );
 		exit(1);
