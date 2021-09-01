@@ -44,11 +44,11 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 			// 3 more bytes to insert '[' and ']\n'
 				size_t sub_len = my_strlen( new_subject );
 				/* mremap( addr, old_size, new_size, flags, ...) __THROW */
-				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 3, MREMAP_MAYMOVE | MREMAP_DONTUNMAP );
+				remap_string( buffer_file, buff_size * sizeof(char),
+						(buff_size + sub_len +3) * sizeof(char) );
+
 				buff_size +=  sub_len + 3;
 
-				assert( buffer_file != MAP_FAILED );
-				
 				std::strcat( buffer_file, "[" );
 				std::strcat( buffer_file, new_subject );
 				std::strcat( buffer_file, "]\n" );
@@ -57,10 +57,11 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 			{
 				// 2 more bytes to insert '-' and ':'
 				size_t sub_len = my_strlen( new_subject );
-				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 2, MREMAP_MAYMOVE | MREMAP_DONTUNMAP );
-				buff_size +=  sub_len + 2;
 
-				assert( buffer_file != MAP_FAILED );
+				remap_string( buffer_file, buff_size * sizeof(char),
+						(buff_size + sub_len + 2) * sizeof(char) );
+
+				buff_size +=  sub_len + 2;
 				
 				std::strcat( buffer_file, "-" );
 				std::strcat( buffer_file, new_subject );
@@ -70,10 +71,11 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 			{
 				// 2 more byte to insert '\t' and '\n'
 				size_t sub_len = my_strlen( new_subject );
-				buffer_file = (char*)mremap( buffer_file, buff_size, buff_size + sub_len + 2, MREMAP_MAYMOVE | MREMAP_DONTUNMAP);
-				buff_size +=  sub_len + 2;
 
-				assert( buffer_file != MAP_FAILED );
+				remap_string( buffer_file, buff_size * sizeof(char),
+						(buff_size + sub_len + 2) * sizeof(char) );
+
+				buff_size +=  sub_len + 2;
 
 				std::strcat( buffer_file, "\t" );
 				std::strcat( buffer_file, new_subject );

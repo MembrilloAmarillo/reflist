@@ -41,8 +41,12 @@ protected:
 
 	inline void buffree()
 	{
+#ifdef __linux__
 		int err = munmap( buffer_file, buff_size * sizeof( char ) );
 		assert( err == 0 );
+#else
+		free( buffer_file );
+#endif
 	}
 };
 
