@@ -13,52 +13,18 @@ class Lexer {
 public:
 	Lexer(){}
 
-	inline void file( char const* path, char* mode ) {
+	void file( char const*, char* );
 
-		file_ref = fopen( path, mode );
+	void buffer( size_t );
 
-		if ( file_ref == nullptr ) {
-			fprintf(stderr, "Error opening file\n");
-			exit(1);
-		}
-
-	}
-	inline void buffer( size_t size ) {
-		buffer_file = (char*)malloc( size * sizeof( char ) );
-		buff_size = size;
-
-		assert( buffer_file != nullptr );
-	}
-
-	inline size_t  get_size()   const { return buff_size;   }
 	inline FILE*   get_file() 	const { return file_ref;    }
 	inline char*   get_buffer() const { return buffer_file; }
+	inline size_t  get_size()   const { return buff_size;   }
+	inline size_t& get_size()  		  { return buff_size;   }
 
-	inline size_t& get_size()  { return buff_size;   }
+	void fileclose();
+	void print_cache();
 
-	inline void fileclose()	{ 
-		buffree();
-		fclose( file_ref ); 
-	}
-
-	void print_cache() {
-		Pila<char*> tmp;
-
-		char buff[126] = {0};
-		while( !cache.vacia() ) {
-			my_strcpy( buff, cache.tope() );
-			tmp.push( buff );
-			cache.pop();
-		}
-
-		while( !tmp.vacia() ) {
-			my_strcpy( buff, tmp.tope() );
-			cache.push( buff );
-			std::cout << buff << std::endl;
-			tmp.pop();
-		}
-	}
-	
 	~Lexer() { }
 
 protected:
