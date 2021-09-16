@@ -18,7 +18,7 @@ public:
 
 	void parse_buffer();
 
-	void insert_subject( char *const, uint8_t );
+	void insert_subject( char *const, entry election );
 	void insert_reference( char *const, char *const, char *const );
 
 	~Parser() {}

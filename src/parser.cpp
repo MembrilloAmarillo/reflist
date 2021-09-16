@@ -35,7 +35,7 @@ void Parser::parse_buffer()
 	}
 }
 
-void Parser::insert_subject( char *const  new_subject,  uint8_t election )
+void Parser::insert_subject( char *const  new_subject,  entry election )
 {
 
 	switch( election ) {
@@ -52,6 +52,7 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 				std::strcat( buffer_file, "[" );
 				std::strcat( buffer_file, new_subject );
 				std::strcat( buffer_file, "]\n" );
+                Lexer::cache.push( new_subject );
 			}break;
 		case entry::TITLE :
 			{
@@ -66,6 +67,7 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 				std::strcat( buffer_file, "-" );
 				std::strcat( buffer_file, new_subject );
 				std::strcat( buffer_file, ":" );
+                Lexer::cache.push( new_subject );
 			}break;
 		case entry::URL :
 			{
@@ -80,11 +82,13 @@ void Parser::insert_subject( char *const  new_subject,  uint8_t election )
 				std::strcat( buffer_file, "\t" );
 				std::strcat( buffer_file, new_subject );
 				std::strcat( buffer_file, "\n" );
+                Lexer::cache.push( new_subject );
 			}break;
 		default:
+          fprintf( stderr, "Error inserting election\n \t function: Parse::insert_subject()\n" );
+          exit( 1 );
 			break;
 	}
-	Lexer::cache.push( new_subject );
 }
 
 void Parser::insert_reference( char* const subject, char* const title, char* const url )
@@ -98,10 +102,10 @@ void Parser::insert_reference( char* const subject, char* const title, char* con
 		my_strcpy( tmp_buff, Lexer::cache.tope() );
 
 		if ( std::strcmp( subject, tmp_buff ) == 0 ) {
-			Lexer::cache.push( title );
+          /* entry::SUBJECT its already inside the stack */
 			insert_subject( title, entry::TITLE );
-			Lexer::cache.push( url );
 			insert_subject( url, entry::URL );
+          /* we can finish the loop, since we found an existing subject */
 			not_founded = false;
 		} else {
 			tmp_cache.push( tmp_buff );
@@ -113,8 +117,6 @@ void Parser::insert_reference( char* const subject, char* const title, char* con
 		insert_subject( subject, entry::SUBJECT );
 		insert_subject( title, entry::TITLE );
 		insert_subject( url, entry::URL );
-		Lexer::cache.push( title );
-		Lexer::cache.push( url   );
 	}
 
 	while( !tmp_cache.vacia() ) {

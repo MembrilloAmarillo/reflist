@@ -79,9 +79,9 @@ int main ()
 			case 5:
 				{
 					not_exit = false;
-					parse_file.print_cache();
-					printf("Exiting...\n");
-				}break;
+					fprintf( stdout, "%s\n" ,parse_file.get_buffer() );
+                    fprintf( stdout, "Exiting...\n" );
+                }break;
 			default:
 				{}break;
 		};
