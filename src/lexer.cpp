@@ -14,15 +14,10 @@ void Lexer::file( char const* path, char* mode )
 
 void Lexer::buffer( size_t size )
 {
-#ifdef __linux__
-	buffer_file = (char*)mmap( NULL, size * sizeof(char), PROT_READ | PROT_WRITE,
-			MAP_PRIVATE | MAP_ANONYMOUS, -1, 0 );
-#else
 	buffer_file = (char*)malloc( size * sizeof(char) );
-#endif
 	buff_size = size;
 
-	assert( buffer_file != MAP_FAILED );
+	assert( buffer_file != nullptr );
 }
 
 void Lexer::fileclose()

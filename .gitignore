@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Random tmp files
+*.cpp
+*.h~

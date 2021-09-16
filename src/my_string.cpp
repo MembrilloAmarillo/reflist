@@ -47,13 +47,7 @@ void my_strcpy( char* dest, char const* src )
 
 void remap_string( char* str, size_t old_len, size_t new_len )
 {
-#ifdef __linux__
-	str = (char*)mremap( str, old_len,
-			new_len, MREMAP_MAYMOVE | MREMAP_DONTUNMAP );
-	assert( str != MAP_FAILED );
-#else
 	(void)old_len;
 	str = (char*)realloc( str, new_len );
 	assert( str != NULL );
-#endif
 }

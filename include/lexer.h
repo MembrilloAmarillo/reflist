@@ -1,11 +1,7 @@
 #ifndef _PARSER_H_
 #define _PARSER_H_
 
-extern "C" {
-#define _GNU_SOURCE 1
-#include <sys/mman.h>
-}
-
+#include <cstring>
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
@@ -41,12 +37,7 @@ protected:
 
 	inline void buffree()
 	{
-#ifdef __linux__
-		int err = munmap( buffer_file, buff_size * sizeof( char ) );
-		assert( err == 0 );
-#else
 		free( buffer_file );
-#endif
 	}
 };
 

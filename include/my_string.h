@@ -1,17 +1,7 @@
 #ifndef _MY_STRING_H_
 #define _MY_STRING_H_
 
-#ifdef __linux__
-
-extern "C" {
-#define _GNU_SOURCE 1
-#include <sys/mman.h>
-}
-
-#else
 #include <cstring>
-#endif
-
 #include <cstdlib>
 #include <cstdio>
 #include <cassert>
