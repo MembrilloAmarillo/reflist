@@ -28,10 +28,10 @@ public:
 
   /* Observer methods */
   inline char* get_buffer() const { return buffer_file; }
-  inline int   get_size()   const { return buff_size;   }
+  inline size_t   get_size()   const { return buff_size;   }
 
   /* Overload of get_size, lvalue */
-  inline int&  get_size() 	  { return buff_size;   }
+  inline size_t&  get_size() 	  { return buff_size;   }
 
   void scan_buffer();
   
@@ -40,7 +40,7 @@ public:
 protected:
   std::fstream file_ref;
   char* buffer_file;
-  int buff_size;
+  size_t buff_size;
 
   struct s_token {
     char* c_token;

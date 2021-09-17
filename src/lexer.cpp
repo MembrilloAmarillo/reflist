@@ -11,13 +11,13 @@ void Lexer::file( char* path )
 
   /* Get file size */
   file_ref.seekg( 0, file_ref.end );
-  int size = file_ref.tellg();
+  size_t size = (size_t)file_ref.tellg();
   file_ref.seekg( 0, file_ref.beg );
 
   create_buffer( size );
   
   /* Get the buffer */
-  file_ref.read( buffer_file, size );
+  file_ref.read( buffer_file, static_cast<long>(size) );
   
   /* Check for errors */
   if ( !file_ref ) {
@@ -29,11 +29,11 @@ void Lexer::file( char* path )
   }
 }
 
-void Lexer::create_buffer( int size )
+void Lexer::create_buffer( size_t size )
 {
   if ( size < 0 ) {
     fprintf( stderr, "lexer.cpp(line 14):\n" );
-    fprintf( stderr, "\033[0;31m\tError creating buffer, size = %ul\033[0;37m", size );
+    fprintf( stderr, "\033[0;31m\tError creating buffer, size = %zu\033[0;37m", size );
     file_ref.close();
     exit( 1 );
   }
