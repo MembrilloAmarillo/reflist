@@ -32,5 +32,6 @@
 *.app
 
 # Random tmp files
-*.cpp~
+*.cpp
 *.h~
+#*

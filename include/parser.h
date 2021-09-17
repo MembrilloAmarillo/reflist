@@ -12,16 +12,12 @@
 class Parser : public Lexer
 {
 public:
-	enum entry { SUBJECT, TITLE, URL };
+  Parser() {}
 
-	Parser() {}
+  void insert_subject( char *const, Lexer::token election );
+  void insert_reference( char *const, char *const, char *const );
 
-	void parse_buffer();
-
-	void insert_subject( char *const, entry election );
-	void insert_reference( char *const, char *const, char *const );
-
-	~Parser() {}
+  ~Parser() {}
 };
 
 #endif

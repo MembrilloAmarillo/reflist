@@ -7,7 +7,7 @@ OBJ_DIR  	= ./obj
 BUILD_DIR 	= ./build
 
 INC = ${INC_DIR}/parser.h ${INC_DIR}/lexer.h \
-	  ${EXT_DIR}/TAD/pila_enla.h \
+	  ${EXT_DIR}/TAD/lista_enla_cab.h \
 	  ${INC_DIR}/my_string.h
 
 SRC = ${SRC_DIR}/main.cpp ${SRC_DIR}/parser.cpp \

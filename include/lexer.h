@@ -5,40 +5,51 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
-#include <iostream>
 
-#include <TAD/pila_enla.h>
+#include <TAD/lista_enla_cab.h>
 #include <my_string.h>
 
 class Lexer { 
 public:
-	Lexer(){}
 
-	void file( char const*, char* );
+  enum token {
+    SUBJECT,
+    TITLE,
+    URL
+  };
+  
+  Lexer(){}
 
-	void buffer( size_t );
+  void file( const char*, const char* );
 
-	inline FILE*   get_file() 	const { return file_ref;    }
-	inline char*   get_buffer() const { return buffer_file; }
-	inline size_t  get_size()   const { return buff_size;   }
-	inline size_t& get_size()  		  { return buff_size;   }
+  void create_buffer( size_t );
 
-	void fileclose();
-	void print_cache();
+  inline FILE*   get_file()   const { return file_ref;    }
+  inline char*   get_buffer() const { return buffer_file; }
+  inline size_t  get_size()   const { return buff_size;   }
+  inline size_t& get_size()  	    { return buff_size;   }
 
-	~Lexer() { }
+  void scan_buffer();
+  
+  ~Lexer() { fileclose(); }
 
 protected:
-	FILE* file_ref;
-	char* buffer_file;
-	size_t buff_size;
+  FILE* file_ref;
+  char* buffer_file;
+  size_t buff_size;
 
-	Pila<char*> cache;
+  struct s_token {
+    char* c_token;
+    enum token e_token;
+  };
+  
+  Lista<s_token> tokens;
 
-	inline void buffree()
-	{
-		free( buffer_file );
-	}
+  inline void buffree()
+  {
+    free( buffer_file );
+  }
+  void fileclose();
 };
 
 #endif
