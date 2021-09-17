@@ -43,13 +43,15 @@ protected:
   size_t buff_size;
 
   struct s_token {
-    char* c_token;
+    char c_token[126];
     enum token e_token;
   };
   
   Lista<s_token> tokens;
 
+  void print_tokens() const;
   void fileclose();
 };
+
 
 #endif
