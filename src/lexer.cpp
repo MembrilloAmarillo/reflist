@@ -1,37 +1,43 @@
 #include <lexer.h>
 
-void Lexer::file( const char* path, const char* mode )
+void Lexer::file( char* path )
 {
-  file_ref = fopen( path, mode );
+  file_ref.open( path, std::fstream::in | std::fstream::out | std::fstream::app );
 
-  if ( file_ref == nullptr ) {
-    fprintf(stderr, "Error opening file\n");
-    exit(1);
+  if( !file_ref ) {
+    fprintf( stderr, "Error opening file\n" );
+    exit( 1 );
   }
 
-  /* Get the file */
-  fseek( file_ref, 0, SEEK_END );
-  size_t size = (size_t)ftell( file_ref );
+  /* Get file size */
+  file_ref.seekg( 0, file_ref.end );
+  int size = file_ref.tellg();
+  file_ref.seekg( 0, file_ref.beg );
+
   create_buffer( size );
-
-  rewind( file_ref );
-
+  
   /* Get the buffer */
-  size_t file_size_read = fread( buffer_file, 1,
-				 size, file_ref );
-
+  file_ref.read( buffer_file, size );
+  
   /* Check for errors */
-  if ( file_size_read != size ) {
-    fprintf( stderr, "\033[0;31mlexer.cpp(line 21):\n" );
-    fprintf( stderr, "\tDiferent sizes, error reading file\n" );
-    exit(1);
+  if ( !file_ref ) {
+    fprintf( stderr, "lexer.cpp(line 20):\n" );
+    fprintf( stderr, "\033[0;31m\tError reading file to buffer\n" );
+    fprintf( stderr, "\033[0;37m\tFunction: file_ref.read( buffer_file, static_cast<std::streamsize>(buff_size)\n" );
+    file_ref.close();
+    exit( 1 );
   }
 }
 
-void Lexer::create_buffer( size_t size )
+void Lexer::create_buffer( int size )
 {
-  assert( size > 0 );
-  buffer_file = (char*)malloc( size * sizeof(char) );
+  if ( size < 0 ) {
+    fprintf( stderr, "lexer.cpp(line 14):\n" );
+    fprintf( stderr, "\033[0;31m\tError creating buffer, size = %ul\033[0;37m", size );
+    file_ref.close();
+    exit( 1 );
+  }
+  buffer_file = new char[ size ];
   buff_size = size;
 
   assert( buffer_file != nullptr );
@@ -39,8 +45,8 @@ void Lexer::create_buffer( size_t size )
 
 void Lexer::fileclose()
 { 
-  buffree();
-  fclose( file_ref ); 
+  delete[] buffer_file;
+  file_ref.close();
 }
 
 

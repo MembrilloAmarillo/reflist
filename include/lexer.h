@@ -3,6 +3,8 @@
 
 #include <cstring>
 #include <cstdio>
+#include <fstream>
+#include <iostream>
 #include <cstdlib>
 #include <cassert>
 
@@ -20,23 +22,25 @@ public:
   
   Lexer(){}
 
-  void file( const char*, const char* );
+  void file( char* );
 
   void create_buffer( size_t );
 
-  inline FILE*   get_file()   const { return file_ref;    }
-  inline char*   get_buffer() const { return buffer_file; }
-  inline size_t  get_size()   const { return buff_size;   }
-  inline size_t& get_size()  	    { return buff_size;   }
+  /* Observer methods */
+  inline char* get_buffer() const { return buffer_file; }
+  inline int   get_size()   const { return buff_size;   }
+
+  /* Overload of get_size, lvalue */
+  inline int&  get_size() 	  { return buff_size;   }
 
   void scan_buffer();
   
   ~Lexer() { fileclose(); }
 
 protected:
-  FILE* file_ref;
+  std::fstream file_ref;
   char* buffer_file;
-  size_t buff_size;
+  int buff_size;
 
   struct s_token {
     char* c_token;
@@ -45,10 +49,6 @@ protected:
   
   Lista<s_token> tokens;
 
-  inline void buffree()
-  {
-    free( buffer_file );
-  }
   void fileclose();
 };
 
