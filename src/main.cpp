@@ -30,6 +30,7 @@ int main ()
   Parser parse_file;
 
   parse_file.file( const_cast<char*>("src/references.txt") );
+
   parse_file.scan_buffer();
 
   bool exit = false;

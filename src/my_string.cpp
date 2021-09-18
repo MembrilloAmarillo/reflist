@@ -26,6 +26,7 @@ void read_substring( char const* buffer, int* i, char *tmp_buffer, const char& d
 
 size_t my_strlen( char const* buffer )
 {
+  assert( buffer != nullptr );
   size_t i = 0;
   do {
     i++;
@@ -37,12 +38,27 @@ void my_strcpy( char* dest, char const* src )
 {
   assert( dest != nullptr && src != nullptr );
 
+  if ( my_strlen( src ) != my_strlen( dest ) ) {
+    try {
+      delete[] dest;
+      dest = new char[ my_strlen( src ) ];
+    } catch( ... ) {
+      try{
+	dest = (char*)realloc( dest, my_strlen( src ) * sizeof( char ) );
+      } catch( ... ) {
+	fprintf( stderr, "destination char* have different size and cannot be reallocated\n" );
+      }
+    }
+  }
+  
   int i = 0;
   do {
     *(dest + i) = *(src + i);
     i++;
   } while( *(src + i) != '\0' );
+
   *(dest + i) = '\0';
+
 }
 
 void remap_string( char* str, size_t old_len, size_t new_len )

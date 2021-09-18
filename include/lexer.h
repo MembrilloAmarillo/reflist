@@ -10,6 +10,7 @@
 
 #include <TAD/lista_enla_cab.h>
 #include <my_string.h>
+// #include <error_handler.h>
 
 class Lexer { 
 public:
@@ -51,6 +52,7 @@ protected:
 
   void print_tokens() const;
   void fileclose();
+
 };
 
 

@@ -2,10 +2,13 @@
 
 void Lexer::file( char* path )
 {
-  file_ref.open( path, std::fstream::in | std::fstream::out | std::fstream::app );
-
-  if( !file_ref ) {
-    fprintf( stderr, "Error opening file\n" );
+  int f_value;
+  try {
+    file_ref.open( path, std::fstream::in | std::fstream::out | std::fstream::app );
+    file_ref.exceptions( std::ifstream::failbit );
+    file_ref >> f_value;
+  } catch ( const std::ios_base::failure& fail ) {
+    fprintf( stderr, "%s\n" ,fail.what() );
     exit( 1 );
   }
 
@@ -15,18 +18,17 @@ void Lexer::file( char* path )
   file_ref.seekg( 0, file_ref.beg );
 
   create_buffer( size );
-  
-  /* Get the buffer */
-  file_ref.read( buffer_file, static_cast<long>(size) );
-  
-  /* Check for errors */
-  if ( !file_ref ) {
-    fprintf( stderr, "lexer.cpp(line 20):\n" );
-    fprintf( stderr, "\033[0;31m\tError reading file to buffer\n" );
-    fprintf( stderr, "\033[0;37m\tFunction: file_ref.read( buffer_file, static_cast<std::streamsize>(buff_size)\n" );
-    file_ref.close();
+
+  try {
+    /* Get the buffer */
+    file_ref.read( buffer_file, static_cast<long>(size) );
+    file_ref.exceptions( std::ifstream::failbit );
+    file_ref >> f_value;
+  } catch ( const std::ios_base::failure& fail ) {
+    fprintf( stderr, "%s\n" ,fail.what() );
     exit( 1 );
   }
+
 }
 
 void Lexer::create_buffer( size_t size )
