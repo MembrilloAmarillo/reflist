@@ -39,7 +39,7 @@ void Lexer::create_buffer( size_t size )
     file_ref.close();
     exit( 1 );
   }
-  buffer_file = new char[ size ];
+  buffer_file = (char*)malloc( size * sizeof(char) );
   buff_size = size;
 
   assert( buffer_file != nullptr );
@@ -47,7 +47,7 @@ void Lexer::create_buffer( size_t size )
 
 void Lexer::fileclose()
 { 
-  delete[] buffer_file;
+  free( buffer_file );
   file_ref.close();
 }
 
