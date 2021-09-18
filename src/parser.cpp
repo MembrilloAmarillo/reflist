@@ -61,37 +61,37 @@ void Parser::insert_reference( char* const subject, char* const title, char* con
   auto pos = tokens.primera();
   for ( ; pos != tokens.fin() && subject_found == false; pos = tokens.siguiente( pos ) ) {
     st = tokens.elemento( pos );
-    if ( std::strcmp( st.c_token, subject ) == 0 ) {
+    if ( my_strcmp( st.c_token, subject ) == 0 ) {
       subject_found = true;
     }
   }
 
   if ( subject_found ) {
-    std::strcpy( st.c_token, title );
+    my_strcpy( st.c_token, title );
     st.e_token = token::TITLE;
     pos = tokens.siguiente( pos );
     tokens.insertar( st, pos );
     insert_subject( st.c_token, st.e_token );    
 
-    std::strcpy( st.c_token, url );
+    my_strcpy( st.c_token, url );
     st.e_token = token::URL;
     pos = tokens.siguiente( pos );
     tokens.insertar( st, pos );
     insert_subject( st.c_token, st.e_token );    
   } else {
     pos = tokens.fin();
-    std::strcpy( st.c_token, subject );
+    my_strcpy( st.c_token, subject );
     st.e_token = token::SUBJECT;
     tokens.insertar( st, pos );
     insert_subject( st.c_token, st.e_token );
     
-    std::strcpy( st.c_token, title );
+    my_strcpy( st.c_token, title );
     st.e_token = token::TITLE;
     pos = tokens.siguiente( pos );
     tokens.insertar( st, pos );
     insert_subject( st.c_token, st.e_token );
     
-    std::strcpy( st.c_token, url );
+    my_strcpy( st.c_token, url );
     st.e_token = token::URL;
     pos = tokens.siguiente( pos );
     tokens.insertar( st, pos );

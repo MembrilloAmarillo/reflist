@@ -1,6 +1,6 @@
 #include <lexer.h>
 
-void Lexer::file( char* path )
+void Lexer::file( const char* path )
 {
   int f_value;
   try {
