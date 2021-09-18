@@ -2,11 +2,9 @@
 
 void Lexer::file( const char* path )
 {
-  int f_value;
+
   try {
     file_ref.open( path, std::fstream::in | std::fstream::out | std::fstream::app );
-    file_ref.exceptions( std::ifstream::failbit );
-    file_ref >> f_value;
   } catch ( const std::ios_base::failure& fail ) {
     fprintf( stderr, "%s\n" ,fail.what() );
     exit( 1 );
@@ -22,8 +20,6 @@ void Lexer::file( const char* path )
   try {
     /* Get the buffer */
     file_ref.read( buffer_file, static_cast<long>(size) );
-    file_ref.exceptions( std::ifstream::failbit );
-    file_ref >> f_value;
   } catch ( const std::ios_base::failure& fail ) {
     fprintf( stderr, "%s\n" ,fail.what() );
     exit( 1 );
@@ -34,7 +30,7 @@ void Lexer::file( const char* path )
 void Lexer::create_buffer( size_t size )
 {
   if ( size < 0 ) {
-    fprintf( stderr, "lexer.cpp(line 14):\n" );
+    fprintf( stderr, "lexer.cpp:\n" );
     fprintf( stderr, "\033[0;31m\tError creating buffer, size = %zu\033[0;37m", size );
     file_ref.close();
     exit( 1 );

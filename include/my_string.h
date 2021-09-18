@@ -10,6 +10,6 @@ int     my_strcmp( const char*, const char* );
 void  	my_strcpy( char*, char const* );
 size_t  my_strlen( char const* );
 void 	read_substring( char const*, int*, char*, const char& );
-void 	remap_string( char* str, size_t old_len, size_t new_len ); 
+void 	remap_string( char* str, size_t new_len ); 
 
 #endif 

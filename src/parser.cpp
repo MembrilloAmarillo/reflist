@@ -10,8 +10,7 @@ void Parser::insert_subject( char *const  new_subject,  Lexer::token election )
       // 3 more bytes to insert '[' and ']\n'
       size_t sub_len = my_strlen( new_subject );
       /* mremap( addr, old_size, new_size, flags, ...) __THROW */
-      remap_string( buffer_file, buff_size * sizeof(char),
-		    (buff_size + sub_len +3) * sizeof(char) );
+      remap_string( buffer_file, (buff_size + sub_len +3) * sizeof(char) );
 
       buff_size +=  sub_len + 3;
 
@@ -24,8 +23,7 @@ void Parser::insert_subject( char *const  new_subject,  Lexer::token election )
       // 2 more bytes to insert '-' and ':'
       size_t sub_len = my_strlen( new_subject );
 
-      remap_string( buffer_file, buff_size * sizeof(char),
-		    (buff_size + sub_len + 2) * sizeof(char) );
+      remap_string( buffer_file, (buff_size + sub_len + 2) * sizeof(char) );
 
       buff_size +=  sub_len + 2;
 				
@@ -38,8 +36,7 @@ void Parser::insert_subject( char *const  new_subject,  Lexer::token election )
       // 2 more byte to insert '\t' and '\n'
       size_t sub_len = my_strlen( new_subject );
 
-      remap_string( buffer_file, buff_size * sizeof(char),
-		    (buff_size + sub_len + 2) * sizeof(char) );
+      remap_string( buffer_file, (buff_size + sub_len + 2) * sizeof(char) );
 
       buff_size +=  sub_len + 2;
 
