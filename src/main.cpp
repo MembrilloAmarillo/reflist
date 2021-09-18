@@ -45,7 +45,7 @@ int main ()
       {
 	std::cout << "Subject name: ";
 	std::cin >> subject;
-	//parse_file.insert_subject( subject, Lexer::token::SUBJECT );
+	parse_file.insert_subject( subject, Lexer::token::SUBJECT );
       }break;
     case 2:
       {
@@ -55,7 +55,7 @@ int main ()
 	std::cin >> title;
 	std::cout << "Url: ";
 	std::cin >> url;
-	//parse_file.insert_reference( subject, title, url );
+	parse_file.insert_reference( subject, title, url );
       }break;
     case 3:
       {}break;

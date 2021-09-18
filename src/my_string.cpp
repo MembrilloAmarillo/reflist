@@ -51,3 +51,7 @@ void remap_string( char* str, size_t old_len, size_t new_len )
   str = (char*)realloc( str, new_len );
   assert( str != NULL );
 }
+
+int my_strcmp( const char* str1, const char* str2 ) {
+  // TODO
+}
