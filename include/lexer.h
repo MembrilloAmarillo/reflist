@@ -39,7 +39,7 @@ public:
   void dump_to_file();
   
   ~Lexer() { fileclose(); }
-  void print_tokens() const;
+
 protected:
   std::fstream file_ref;
   char* buffer_file;
@@ -52,6 +52,7 @@ protected:
   
   List<s_token> tokens;
 
+  void print_tokens() const;
   void fileclose();
 
 };
