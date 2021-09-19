@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cassert>
 
-#include <TAD/lista_enla_cab.h>
+#include <TAD/sentinel_node_linked_list.h>
 #include <my_string.h>
 // #include <error_handler.h>
 
@@ -36,8 +36,10 @@ public:
 
   void scan_buffer();
   
+  void dump_to_file();
+  
   ~Lexer() { fileclose(); }
-
+  void print_tokens() const;
 protected:
   std::fstream file_ref;
   char* buffer_file;
@@ -48,9 +50,8 @@ protected:
     enum token e_token;
   };
   
-  Lista<s_token> tokens;
+  List<s_token> tokens;
 
-  void print_tokens() const;
   void fileclose();
 
 };

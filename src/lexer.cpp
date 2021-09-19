@@ -51,7 +51,7 @@ void Lexer::fileclose()
 void Lexer::scan_buffer()
 {
   char buffer[126] = {0};
-  auto token_pos = tokens.primera();
+  auto token_pos = tokens.first();
 
   int i = 0;
   while( *( buffer_file + i ) != '\0' ) {
@@ -65,8 +65,8 @@ void Lexer::scan_buffer()
 	s_token s_tk;
 	s_tk.e_token = token::SUBJECT;
 	my_strcpy( s_tk.c_token, buffer );
-	tokens.insertar( s_tk, token_pos );
-	token_pos = tokens.siguiente( token_pos );
+	tokens.insert( s_tk, token_pos );
+	token_pos = tokens.next( token_pos );
       }break;
     case '-':
       {
@@ -75,8 +75,8 @@ void Lexer::scan_buffer()
 	s_token s_tk;
 	s_tk.e_token = token::TITLE;
 	my_strcpy( s_tk.c_token, buffer );
-	tokens.insertar( s_tk, token_pos );
-	token_pos = tokens.siguiente( token_pos );
+	tokens.insert( s_tk, token_pos );
+	token_pos = tokens.next( token_pos );
       }break;
     case ':':
       {
@@ -85,8 +85,8 @@ void Lexer::scan_buffer()
 	s_token s_tk;
 	s_tk.e_token = token::URL;
 	my_strcpy( s_tk.c_token, buffer );
-	tokens.insertar( s_tk, token_pos );
-	token_pos = tokens.siguiente( token_pos );
+	tokens.insert( s_tk, token_pos );
+	token_pos = tokens.next( token_pos );
       }break;
     default:
       {}break;
@@ -100,10 +100,15 @@ void Lexer::scan_buffer()
 
 void Lexer::print_tokens() const
 {
-  auto pos = tokens.primera();
+  auto pos = tokens.first();
 
-  for( ; pos != tokens.fin(); pos = tokens.siguiente( pos ) ) {
-    std::cout << "Token: " << tokens.elemento( pos ).c_token << std::endl;
-    std::cout << "\t Tipo: " << tokens.elemento( pos ).e_token << std::endl;
+  for( ; pos != tokens.end(); pos = tokens.next( pos ) ) {
+    std::cout << "Token: " << tokens.element( pos ).c_token << std::endl;
+    std::cout << "\tTipo: " << tokens.element( pos ).e_token << std::endl;
   }
+}
+
+void Lexer::dump_to_file()
+{
+  fprintf( stdout, "TODO\n" );
 }

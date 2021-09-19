@@ -14,9 +14,8 @@ class Parser : public Lexer
 public:
   Parser() {}
 
-  void insert_subject( char *const, Lexer::token election );
   void insert_reference( char *const, char *const, char *const );
-
+  
   ~Parser() {}
 };
 

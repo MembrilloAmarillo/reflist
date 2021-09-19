@@ -9,7 +9,7 @@ void read_substring( char const* buffer, int* i, char *tmp_buffer, const char& d
   while( ( *( buffer + *i ) != delimiter )  && ( *( buffer + *i ) != '\0' ) ) {
 
     if ( j >= 126 ) {
-      fprintf( stderr, "Error allocating memory, substring too large\n" );
+      fprintf( stderr, "Substring can not be larger than 126\n" );
       exit( 1 );
     }
 
@@ -28,29 +28,24 @@ size_t my_strlen( char const* buffer )
 {
   assert( buffer != nullptr );
   size_t i = 0;
+
   do {
     i++;
   } while ( *(buffer + i) != '\0' );
+
   return i;
 }
 
 void my_strcpy( char* dest, char const* src )
 {
   assert( dest != nullptr && src != nullptr );
-  
-  int i = 0;
-  do {
-    *(dest + i) = *(src + i);
-    i++;
-  } while( *(src + i) != '\0' );
 
-  *(dest + i) = '\0';
-
+  memcpy( dest, src, my_strlen( src ) + 1 );
 }
 
 void remap_string( char* str, size_t new_len )
 {
-  str = (char*)realloc( str, new_len );
+  str = (char*)realloc( str, new_len * sizeof( char ) );
   assert( str != nullptr );
 }
 
@@ -58,16 +53,17 @@ int my_strcmp( const char* str1, const char* str2 ) {
   int idx = 0;
   bool equal = true;
   do {
-    if ( *( str1 + idx ) != '\0' && *( str2 + idx ) == '\0' ) {
-      return 1;
-    } else if ( *( str1 + idx ) == '\0' && *( str2 + idx ) != '\0' ) {
-      return -1;
-    } else if ( *( str1 + idx ) == *( str2 + idx ) ) {
-      // equal = true;
-    } else {
+    if ( *( str1 + idx ) != *( str2 + idx ) ) {
       equal = false;
+    } else if ( ( *( str1 + idx ) == '\0' ) && ( *( str2 + idx ) != '\0' ) ) {
+      return -1; // as if str1 is smaller than str2 
+    } else if ( ( *( str1 + idx ) != '\0' ) && ( *( str2 + idx ) == '\0' ) ) {
+      return 1; // viceversa
+    } else {
+      // equal = true
     }
-  } while ( *( str1 + idx ) != '\0' || *( str2 + idx ) != '\0' );
+    idx++;
+  } while ( *( str1 + idx ) != '\0' && *( str2 + idx ) != '\0' );
 
   if ( equal ) {
     return 0;

@@ -43,13 +43,13 @@ int main ()
     switch( output ) {
     case 1:
       {
-	std::cout << "Subject name: ";
-	std::cin >> subject;
-	std::cout << "Title name: ";
-	std::cin >> title;
-	std::cout << "Url: ";
-	std::cin >> url;
-	parse_file.insert_reference( subject, title, url );
+        std::cout << "Subject name: ";
+        std::cin >> subject;
+        std::cout << "Title name: ";
+        std::cin >> title;
+        std::cout << "Url: ";
+        std::cin >> url;
+        parse_file.insert_reference( subject, title, url );
       }break;
     case 2:
       {}break;
@@ -57,9 +57,9 @@ int main ()
       {}break;
     case 4:
       {
-	exit = true;
-	parse_file.print_tokens();
-	fprintf( stdout, "Exiting...\n" );
+        exit = true;
+        parse_file.print_tokens();
+        fprintf( stdout, "Exiting...\n" );
       }break;
     default:
       {
