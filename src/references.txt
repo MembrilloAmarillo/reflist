@@ -1,6 +1,3 @@
 [AAED]
-- libro: 	https://aslkdfj.com
-
-[POO]
-- bjorne: 	http://asldkasdf.com
-
+-book:book.com
+-libro:libro.com

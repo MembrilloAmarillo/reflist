@@ -42,6 +42,7 @@ public:
 
 protected:
   std::fstream file_ref;
+  char* path_file;
   char* buffer_file;
   size_t buff_size;
 

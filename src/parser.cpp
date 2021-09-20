@@ -38,8 +38,45 @@ void Parser::insert_reference( char* const subject, char* const title, char* con
     st.e_token = token::URL;
     pos = tokens.next( pos );
     tokens.insert( st, pos );
-  }
+  }  
+}
 
+void Parser::dump_file()
+{
+  auto pos = Lexer::tokens.first();
 
+  Lexer::file_ref.close();
+  Lexer::file_ref.open( Lexer::path_file, std::fstream::out | std::fstream::trunc );
   
+  for( ; pos != Lexer::tokens.end(); pos = Lexer::tokens.next( pos ) ) {
+    char *element = Lexer::tokens.element( pos ).c_token;
+    Lexer::token election = Lexer::tokens.element( pos ).e_token;
+    size_t size  = my_strlen( element );
+    
+    switch( election ) {
+    case SUBJECT:
+      {
+        file_ref.put( '[' );
+        file_ref.write( element, (long)size );
+        file_ref.put( ']' );
+        file_ref.put( '\n' );
+      } break;
+    case TITLE:
+      {
+        file_ref.put( '-' );
+        file_ref.write( element, (long)size );
+        file_ref.put( ':' );        
+      } break;
+    case URL:
+      {
+        file_ref.write( element, (long)size );
+        file_ref.put( '\n' );
+      } break;
+    default:
+      {
+        fprintf( stderr, "dump_file(): error getting token\n" );
+        exit( 1 );
+      } break;
+    }
+  }
 }

@@ -15,6 +15,8 @@ public:
   Parser() {}
 
   void insert_reference( char *const, char *const, char *const );
+
+  void dump_file();
   
   ~Parser() {}
 };

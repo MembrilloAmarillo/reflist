@@ -59,6 +59,7 @@ int main ()
       {
         exit = true;
         fprintf( stdout, "Exiting...\n" );
+        parse_file.dump_file();
       }break;
     default:
       {

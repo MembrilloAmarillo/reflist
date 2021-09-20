@@ -3,8 +3,11 @@
 void Lexer::file( const char* path )
 {
 
+  path_file = ( char* )malloc( my_strlen( path ) * sizeof( char ) );
+  my_strcpy( path_file, path );
+
   try {
-    file_ref.open( path, std::fstream::in | std::fstream::out | std::fstream::app );
+    file_ref.open( path, std::fstream::in );
   } catch ( const std::ios_base::failure& fail ) {
     fprintf( stderr, "%s\n" ,fail.what() );
     exit( 1 );
