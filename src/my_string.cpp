@@ -57,7 +57,10 @@ int my_strcmp( const char* str1, const char* str2 ) {
       return -1; // as if str1 is smaller than str2 
     } else if ( ( *( str1 + idx ) != '\0' ) && ( *( str2 + idx ) == '\0' ) ) {
       return 1; // viceversa
-    } else {
+    } else if ( *( str1 + idx ) != *( str2 + idx ) ) {
+      return -2;
+    }
+    else {
       // equal = true
     }
     idx++;

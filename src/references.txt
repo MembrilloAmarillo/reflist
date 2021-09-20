@@ -1,3 +1,6 @@
 [AAED]
+-amogus:amogus.com
 -book:book.com
 -libro:libro.com
+[POO]
+-python:kekw.com
