@@ -51,14 +51,16 @@ void remap_string( char* str, size_t new_len )
 
 int my_strcmp( const char* str1, const char* str2 ) {
   int idx = 0;
+  int diff = (int)( my_strlen( str1 ) - my_strlen( str2 ) );
 
   do {
     if ( ( *( str1 + idx ) == '\0' ) && ( *( str2 + idx ) != '\0' ) ) {
-      return 1; // as if str1 is smaller than str2 
+      return diff;
     } else if ( ( *( str1 + idx ) != '\0' ) && ( *( str2 + idx ) == '\0' ) ) {
-      return -1; // viceversa
-    }
-    else {
+      return diff; 
+    }else if ( *( str1 + idx ) != *( str2 + idx ) ) {
+      return -1;
+    }else {
 		// equal
     }
     idx++;
