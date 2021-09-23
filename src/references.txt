@@ -1,3 +1,5 @@
 [AAED]
+-recomendacion:recomendacion.com
+-compose:composer.com
 -book:book.com
 -libro:libro.com
