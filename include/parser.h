@@ -15,6 +15,7 @@ public:
   Parser() {}
 
   void insert_reference( char *const, char *const, char *const );
+  bool delete_reference( const char* );
 
   void dump_file();
   

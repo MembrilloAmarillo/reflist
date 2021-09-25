@@ -52,7 +52,11 @@ int main ()
         parse_file.insert_reference( subject, title, url );
       }break;
     case 2:
-      {}break;
+      {
+        std::cout << "Subject name: ";
+        std::cin >> subject;
+        parse_file.delete_reference( subject );
+      }break;
     case 3:
       {}break;
     case 4:

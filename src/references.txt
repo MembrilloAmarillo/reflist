@@ -1,9 +1,3 @@
-[AAED]
--recomendacion:recomendacion.com
--compose:composer.com
--amogus:amogus.com
--book:book.com
--libro:libro.com
 [POO]
 -python:kekw.com
 [SO]

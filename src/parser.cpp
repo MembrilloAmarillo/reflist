@@ -80,3 +80,20 @@ void Parser::dump_file()
     }
   }
 }
+
+bool Parser::delete_reference( const char *subject )
+{
+  auto pos = Lexer::tokens.first();
+  bool found = false;
+
+  for( ; pos != Lexer::tokens.end() && !found; pos = Lexer::tokens.next( pos ) ) {
+    if( my_strcmp( subject, Lexer::tokens.element( pos ).c_token ) == 0 ) {
+      Lexer::tokens.erase( pos );
+      for( ; Lexer::tokens.element( pos ).e_token != Lexer::token::SUBJECT; pos = Lexer::tokens.next(pos) ) {
+        Lexer::tokens.erase( pos );
+      }
+      found = true;
+    }
+  }
+  return found;
+}
