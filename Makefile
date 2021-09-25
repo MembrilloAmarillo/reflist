@@ -32,11 +32,13 @@ all: ${TARGET}
 
 ${TARGET} : ${OBJ}
 	@mkdir -p $(BUILD_DIR)
-	${CC} ${CXXFLAGS} -o $@ $^ ${LIBS}
+	@echo '\e[96mCompiling $^:\n\t\e[36m ${CC} ${CXXFLAGS} -o $@ $^ ${LIBS}'
+	@${CC} ${CXXFLAGS} -o $@ $^ ${LIBS}
 
 ./obj/%.o : ${SRC_DIR}/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	${CC} ${CXXFLAGS} -c -o $@ $< 
+	@echo '\e[96mCompiling $<:\n\t\e[36m ${CC} ${CXXFLAGS} -c -o $@ $<'
+	@${CC} ${CXXFLAGS} -c -o $@ $< 
 
 .PHONY : clean
 
