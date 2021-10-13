@@ -1,6 +1,7 @@
 #include <display.h>
 
-void Display::Display_Init() {
+void Display::Init()
+{
     SDL_Init( SDL_INIT_VIDEO );
     window = SDL_CreateWindow( "Reflist", 
                                             SDL_WINDOWPOS_UNDEFINED,
@@ -23,7 +24,22 @@ void Display::Display_Init() {
     SDL_Delay( 3000 );
 }
 
-void Display::Display_Destroy() {
+void Display::Set_Font( const char* ttf )
+{
+  font = TTF_OpenFont( ttf, 18 );
+  if( font == NULL ) {
+    fprintf( stderr, "Error setting font\n" );
+    exit( 1 );
+  }
+}
+
+void Display::Events()
+{
+  assert( false && "TODO: Make a event handler" );
+}
+
+void Display::Destroy()
+{
     SDL_DestroyWindow(window);
 
     // Clean up

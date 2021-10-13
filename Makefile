@@ -26,7 +26,7 @@ ifeq ($(debug), 1)
 	CXXFLAGS += -g
 endif
 
-LIBS = -lstdc++ -lSDL2
+LIBS = -lstdc++ -lSDL2 -lSDL2_ttf
 
 TARGET = ${BUILD_DIR}/parser
 

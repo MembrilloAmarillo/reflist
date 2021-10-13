@@ -28,7 +28,7 @@ public:
   void create_buffer( size_t );
 
   /* Observer methods */
-  inline char* get_buffer()    const { return buffer_file; }
+  inline char*    get_buffer() const { return buffer_file; }
   inline size_t   get_size()   const { return buff_size;   }
 
   /* Overload of get_size, lvalue */

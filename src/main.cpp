@@ -28,8 +28,9 @@ static int menu()
 int main () 
 {
   Display* disp = new Display();
-  disp->Display_Init();
-
+  disp->Init();
+  disp->Set_Font( "/usr/share/fonts/truetype/Courier.ttf" );
+  
   Parser parse_file;
 
   parse_file.file( const_cast<char*>("./src/references.txt") );
@@ -76,7 +77,7 @@ int main ()
       }break;
     };
   }
-  disp->Display_Destroy();
+  disp->Destroy();
   return EXIT_SUCCESS;
 }
 
