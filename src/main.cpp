@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <iostream>
 
+#include <display.h>
 #include <parser.h>
 #include <lexer.h>
 
@@ -26,6 +27,9 @@ static int menu()
 
 int main () 
 {
+  Display* disp = new Display();
+  disp->Display_Init();
+
   Parser parse_file;
 
   parse_file.file( const_cast<char*>("./src/references.txt") );
@@ -72,7 +76,7 @@ int main ()
       }break;
     };
   }
-
+  disp->Display_Destroy();
   return EXIT_SUCCESS;
 }
 
